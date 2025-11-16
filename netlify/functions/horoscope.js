@@ -1,7 +1,7 @@
 export async function handler(event) {
-  const zodiac = event.queryStringParameters.zodiac || "aries";
+  const sign = event.queryStringParameters.sign || "aries";  // ✅ use 'sign'
   const apiKey = "nklqSaiR/RBkp3IP/7MGiQ==fYyUf2ZPFARjzogQ";
-  const url = `https://api.api-ninjas.com/v1/horoscope?sign=${zodiac}`;
+  const url = `https://api.api-ninjas.com/v1/horoscope?sign=${sign}`;
 
   try {
     const res = await fetch(url, { headers: { 'X-Api-Key': apiKey }});
