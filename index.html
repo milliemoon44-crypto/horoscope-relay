@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Horoscope Relay</title>
+  <style>
+    body {
+      background: rgba(0,0,0,0.3);
+      border: 2px solid #32e0c4;
+      box-shadow: 0 0 12px #32e0c455;
+      color: #32e0c4;
+      padding: 12px;
+      font-family: 'Orbitron', sans-serif;
+    }
+    h3 { color:#9b59ff; text-align:center; margin:0 0 10px 0; }
+    hr { border:0; border-top:1px solid #32e0c4; margin:10px 0; }
+    .timestamp { font-size:12px; color:#9b59ff; text-align:right; margin-top:10px; }
+  </style>
+</head>
+<body>
+  <h3>Stellar Guidance</h3>
+  <div id="horoscope"></div>
+  <div id="timestamp" class="timestamp"></div>
+
+  <script>
+    async function loadHoroscope(sign) {
+      const apiKey = "nklqSaiR/RBkp3IP/7MGiQ==fYyUf2ZPFARjzogQ"; // your API key
+      const url = `https://api.api-ninjas.com/v1/horoscope?sign=${sign}`;
+      const res = await fetch(url, { headers: { 'X-Api-Key': apiKey }});
+      const data = await res.json();
+      return `<strong style="color:#9b59ff;">${sign.toUpperCase()}</strong><br>${data.horoscope}`;
+    }
+
+    async function updateHoroscope() {
+      const aquarius = await loadHoroscope("aquarius");
+      const libra = await loadHoroscope("libra");
+      const virgo = await loadHoroscope("virgo");
+      const aries = await loadHoroscope("aries");
+
+      document.getElementById("horoscope").innerHTML =
+        aquarius + "<hr>" + libra + "<hr>" + virgo + "<hr>" + aries;
+
+      const now = new Date();
+      const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      document.getElementById("timestamp").textContent = "Updated: " + now.toLocaleDateString('en-US', options);
+    }
+
+    updateHoroscope();
+    setInterval(updateHoroscope, 86400000); // refresh daily
+  </script>
+</body>
+</html>
