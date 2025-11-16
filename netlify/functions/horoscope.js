@@ -1,7 +1,7 @@
 export async function handler(event) {
   const sign = event.queryStringParameters.sign || "aries";
   const apiKey = "nklQsAiR/RBkp3IP/7MGiQ==fYyUf2"; // your actual key
-  const url = `https://api.api-ninjas.com/v1/horoscope?sign=${sign}`;
+  const url = `https://api.api-ninjas.com/v1/horoscope?zodiac=${sign}`;
 
   try {
     const res = await fetch(url, {
@@ -22,4 +22,3 @@ export async function handler(event) {
     };
   }
 }
-
